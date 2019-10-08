@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="ASCIIDocToDITA" default="dist">
+    <property name="input.file" value=""/>
+    <property name="output.file" value=""/>
+    <property name="output.file.temp1" value="${output.file}Temp1"/>
+    <property name="output.file.temp2" value="${output.file}Temp2"/>
+    <property name="output.file.temp3" value="${output.file}Temp3"/>
+    <property name="asciidoc.install.dir" value="C:\Users\radu_coravu\Downloads\asciidoc-8.6.9\asciidoc-8.6.9"/>
+    <echo>Input File ${input.file}</echo>
+    <echo>Output File ${output.file}</echo>
+    <target name="dist">
+        <exec executable="asciidoc" osfamily="unix" taskname="asciidoc">
+            <arg line="&quot;@{src}&quot;"/>
+        </exec>
+        <!-- For Windows run from a DOS command -->
+        <exec executable="cmd" osfamily="windows" taskname="asciidoc">
+            <arg value="/C"/>
+            <arg value="${asciidoc.install.dir}\asciidoc.py -o &quot;${output.file.temp1}&quot; -b docbook &quot;${input.file}&quot;"/>
+        </exec>
+        
+        
+        <loadfile property="contents1" srcFile="${output.file.temp1}" />
+        <echo message="${contents1}" />
+        
+        <!-- Now convert Docbook 4 to Docbook 5 -->
+        <xslt in="${output.file.temp1}" out="${output.file.temp2}" style="db4-upgrade.xsl">
+            <xmlcatalog>
+                <catalogpath path="../../../catalog-dita.xml"/>
+            </xmlcatalog>
+        </xslt>
+        
+        <!-- Now convert DocBook 5 to DITA -->
+        <xslt in="${output.file.temp2}" out="${output.file.temp3}" style="dbdita/db2dita/docbook2dita.xsl">
+            <xmlcatalog>
+                <catalogpath path="../../../catalog-dita.xml"/>
+            </xmlcatalog>
+        </xslt>
+        
+        <!-- Now expand @class attributes in DITA content -->
+        <xslt in="${output.file.temp3}" out="${output.file}" style="identity.xsl">
+            <xmlcatalog>
+                <catalogpath path="../../../catalog-dita.xml"/>
+            </xmlcatalog>
+        </xslt>
+    </target>
+</project>

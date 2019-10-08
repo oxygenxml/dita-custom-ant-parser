@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="com.oxygenxml.ant.parser.dita">
+  <feature extension="dita.conductor.lib.import" file="lib/antProcessDita.jar"/>
+  <feature extension="dita.parser">
+    <parser format="ant-parser" class="com.oxygenxml.ant.dita.AntProcessReader"/>
+  </feature>
+</plugin>
