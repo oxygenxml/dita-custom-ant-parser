@@ -9,8 +9,8 @@
     <echo>Input File ${input.file}</echo>
     <echo>Output File ${output.file}</echo>
     <target name="dist">
-        <exec executable="asciidoc" osfamily="unix" taskname="asciidoc">
-            <arg line="&quot;@{src}&quot;"/>
+        <exec executable="${asciidoc.install.dir}/asciidoc.py" osfamily="unix" taskname="asciidoc">
+            <arg line="-o &quot;${output.file.temp1}&quot; -b docbook &quot;${input.file}&quot;"/>
         </exec>
         <!-- For Windows run from a DOS command -->
         <exec executable="cmd" osfamily="windows" taskname="asciidoc">
