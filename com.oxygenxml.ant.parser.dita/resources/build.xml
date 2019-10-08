@@ -18,10 +18,6 @@
             <arg value="${asciidoc.install.dir}\asciidoc.py -o &quot;${output.file.temp1}&quot; -b docbook &quot;${input.file}&quot;"/>
         </exec>
         
-        
-        <loadfile property="contents1" srcFile="${output.file.temp1}" />
-        <echo message="${contents1}" />
-        
         <!-- Now convert Docbook 4 to Docbook 5 -->
         <xslt in="${output.file.temp1}" out="${output.file.temp2}" style="db4-upgrade.xsl">
             <xmlcatalog>
