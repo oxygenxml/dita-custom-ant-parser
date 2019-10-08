@@ -5,7 +5,7 @@
     <property name="output.file.temp1" value="${output.file}Temp1"/>
     <property name="output.file.temp2" value="${output.file}Temp2"/>
     <property name="output.file.temp3" value="${output.file}Temp3"/>
-    <property name="asciidoc.install.dir" value="C:\Users\radu_coravu\Downloads\asciidoc-8.6.9\asciidoc-8.6.9"/>
+    <property name="asciidoc.install.dir" value="C:\path\to\asciidoc-8.6.9"/>
     <echo>Input File ${input.file}</echo>
     <echo>Output File ${output.file}</echo>
     <target name="dist">
