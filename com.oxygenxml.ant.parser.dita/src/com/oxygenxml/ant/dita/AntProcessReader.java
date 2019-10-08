@@ -125,7 +125,7 @@ public class AntProcessReader implements XMLReader {
 				//Expected output file
 				File outputFile = File.createTempFile("test", ".out");
 
-				Source resolvedBuildXML = CatalogUtils.getCatalogResolver().resolve("plugin:com.oxygenxml.ant.dita:" + "/resources/build.xml", new File(".").toURI().toURL().toString());
+				Source resolvedBuildXML = CatalogUtils.getCatalogResolver().resolve("plugin:com.oxygenxml.ant.parser.dita:" + "/resources/build.xml", new File(".").toURI().toURL().toString());
 				if(resolvedBuildXML != null) {
 					//We need to run the build file.
 					boolean success = executeAntBuildFile(
