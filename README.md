@@ -1,4 +1,4 @@
-# dita-ant
+# dita-asciidoc
 DITA Open Toolkit plugin which can apply in the pre-process stage a custom ANT build file over the original topic contents.
 As an example the plugin is configured to dynamically change ASCIIDOC files to DITA. 
 
