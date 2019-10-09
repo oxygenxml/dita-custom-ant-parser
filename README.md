@@ -10,3 +10,8 @@ Installation steps:
 1. The build file **com.oxygenxml.ant.parser.dita/resources/build.xml** needs to be edited and the path "asciidoc.install.dir" needs to be set to the place 
 1. A sample DITA Map can be found in the "asciiDocSamples" sample folder.
 
+Copyright and License
+---------------------
+Copyright 2019 Syncro Soft SRL.
+
+This project is licensed under [Apache License 2.0](https://github.com/oxygenxml/dita-asciidoc/blob/master/LICENSE)
