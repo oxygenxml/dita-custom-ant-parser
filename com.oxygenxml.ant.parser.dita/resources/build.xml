@@ -19,7 +19,7 @@
         </exec>
         
         <!-- Now convert Docbook 4 to Docbook 5 -->
-        <xslt in="${output.file.temp1}" out="${output.file.temp2}" style="db4-upgrade.xsl">
+        <xslt in="${output.file.temp1}" out="${output.file.temp2}" style="db4-upgrade-custom.xsl">
             <xmlcatalog>
                 <catalogpath path="../../../catalog-dita.xml"/>
             </xmlcatalog>

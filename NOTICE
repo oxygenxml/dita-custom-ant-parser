@@ -1,0 +1,10 @@
+============================================================================
+==  NOTICE file corresponding to section 4(d) of the Apache License,      ==
+==  Version 2.0, in this case for the dita-asciidoc distribution.             ==
+============================================================================
+Copyright 2019 Syncro Soft SRL.
+
+This project includes an XSLT stylesheet (com.oxygenxml.ant.parser.dita/resources/db4-upgrade-custom.xsl), part of Docbook Stylesheets (https://docbook.org/tools/) released under the DocBook XSL License (see https://cdn.docbook.org/release/xsl/current/COPYING) 
+
+This project includes XSLT stylesheets (com.oxygenxml.ant.parser.dita/resources/dbdita/) that were originally part of DITA-OT distribution: https://sourceforge.net/projects/dita-ot/files/Plug-in_%20dockbook2dita/
+License: Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0) 
