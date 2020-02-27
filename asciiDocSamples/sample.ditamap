@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
 <map>
-    <title>Sample ASCIIDoc</title>
-    <topicref href="test.asciidoc" format="ant-parser"></topicref>
+ <title>Sample ASCIIDoc</title>
+ <topicref href="test.asciidoc" format="ant-parser"/>
+ <topicref href="testRestructured.rst" format="ant-parser"/>
 </map>
