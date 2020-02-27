@@ -1,6 +1,6 @@
-# dita-asciidoc
+# dita-custom-ant-parser
 DITA Open Toolkit plugin which can apply in the pre-process stage a custom ANT build file over the original topic contents.
-As an example the plugin is configured to dynamically change ASCIIDOC files to DITA. 
+As an example the plugin is configured to dynamically change ASCIIDOC and reStructureText files to DITA. 
 
 Installation steps:
 
