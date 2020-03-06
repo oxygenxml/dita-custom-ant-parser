@@ -1,89 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." name="ASCIIDocToDITA" default="dist">
+<project basedir="." name="ShowGitChanges" default="dist">
     <property name="input.file" value=""/>
     <property name="output.file" value=""/>
     <property name="output.file.temp1" value="${output.file}Temp1"/>
     <property name="output.file.temp2" value="${output.file}Temp2"/>
     <property name="output.file.temp3" value="${output.file}Temp3"/>
-    <property name="asciidoc.install.dir" value="/Users/raducoravu/Desktop/asciidoc-8.6.9"/>
-    <property name="restructure.install.dir" value="/Users/raducoravu/Downloads/docutils-code-r8494-trunk-docutils/tools"/>
-    <echo>Input File ${input.file}</echo>
-    <echo>Output File ${output.file}</echo>
+    <echo>Input File2 ${input.file}</echo>
+    <echo>Output File2 ${output.file}</echo>
     <target name="dist">
-     <condition property="asciidoc" value="true">
-      <matches pattern="(.*)\.asciidoc" string="${input.file}"/>
-     </condition>
-     <condition property="restructure" value="true">
-      <matches pattern="(.*)\.rst" string="${input.file}"/>
-     </condition>
-     <antcall target="asciidoc2dita"/>
-     <antcall target="restructure2dita"/>
-    </target>
-    
-    <target name="asciidoc2dita" if="${asciidoc}">
-        <exec executable="${asciidoc.install.dir}/asciidoc.py" osfamily="unix" taskname="asciidoc">
-            <arg line="-o &quot;${output.file.temp1}&quot; -b docbook &quot;${input.file}&quot;"/>
-        </exec>
-        <!-- For Windows run from a DOS command -->
-        <exec executable="cmd" osfamily="windows" taskname="asciidoc">
-            <arg value="/C"/>
-            <arg value="${asciidoc.install.dir}\asciidoc.py -o &quot;${output.file.temp1}&quot; -b docbook &quot;${input.file}&quot;"/>
-        </exec>
-        
-        <!-- Now convert Docbook 4 to Docbook 5 -->
-        <xslt in="${output.file.temp1}" out="${output.file.temp2}" style="db4-upgrade.xsl">
-            <xmlcatalog>
-                <catalogpath path="../../../catalog-dita.xml"/>
-            </xmlcatalog>
-        </xslt>
-        
-        <!-- Now convert DocBook 5 to DITA -->
-        <xslt in="${output.file.temp2}" out="${output.file.temp3}" style="dbdita/db2dita/docbook2dita.xsl">
+        <dirname property="baseFolder" file="${input.file}"/>
+       <!-- Find out all changes in the project -->
+       <exec executable="git" dir="${baseFolder}/../">
+        <arg line="diff --name-only oxygen22.0"/>
+        <redirector output="${baseFolder}/changes.txt" alwayslog="true"/>
+       </exec>
+        <!-- Create the topic containing the list of changes -->
+        <xslt in="createChangesTopic.xsl" style="createChangesTopic.xsl" out="${output.file.temp1}">
             <xmlcatalog>
                 <catalogpath path="../../../catalog-dita.xml"/>
             </xmlcatalog>
         </xslt>
         
         <!-- Now expand @class attributes in DITA content -->
-        <xslt in="${output.file.temp3}" out="${output.file}" style="identity.xsl">
+        <xslt in="${output.file.temp1}" out="${output.file}" style="identity.xsl">
             <xmlcatalog>
                 <catalogpath path="../../../catalog-dita.xml"/>
             </xmlcatalog>
         </xslt>
     </target>
- 
- <target name="restructure2dita" if="${restructure}">
-  <exec executable="${restructure.install.dir}/rst2html.py" osfamily="unix" taskname="restructure">
-   <arg line="&quot;${input.file}&quot; &quot;${output.file.temp1}&quot;"/>
-  </exec>
-  <!-- For Windows run from a DOS command -->
-  <exec executable="cmd" osfamily="windows" taskname="restructure">
-   <arg value="/C"/>
-   <arg value="${restructure.install.dir}\rst2html.py &quot;${input.file}&quot; &quot;${output.file.temp1}&quot;"/>
-  </exec>
-  
-  <!--<replace file="${output.file.temp1}" token="&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;>" value=""/>-->
-  
-  <!-- Now convert HTML to DITA -->
-  <xslt in="${output.file.temp1}" out="${output.file.temp2}" style="html2dita/preprocess.xsl">
-   <xmlcatalog>
-    <catalogpath path="../../../catalog-dita.xml"/>
-    <catalogpath path="html2dita/catalog.xml"/>
-   </xmlcatalog>
-  </xslt>
-  
-  <xslt in="${output.file.temp2}" out="${output.file.temp3}" style="html2dita/h2d.xsl">
-   <xmlcatalog>
-    <catalogpath path="../../../catalog-dita.xml"/>
-    <catalogpath path="html2dita/catalog.xml"/>
-   </xmlcatalog>
-  </xslt>
-  
-  <!-- Now expand @class attributes in DITA content -->
-  <xslt in="${output.file.temp3}" out="${output.file}" style="identity.xsl">
-   <xmlcatalog>
-    <catalogpath path="../../../catalog-dita.xml"/>
-   </xmlcatalog>
-  </xslt>
- </target>
 </project>
