@@ -16,6 +16,7 @@
        </exec>
         <!-- Create the topic containing the list of changes -->
         <xslt in="createChangesTopic.xsl" style="createChangesTopic.xsl" out="${output.file.temp1}">
+            <param name="pathToChangesFile" expression="${baseFolder}/changes.txt"/>
             <xmlcatalog>
                 <catalogpath path="../../../catalog-dita.xml"/>
             </xmlcatalog>
