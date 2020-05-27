@@ -20,7 +20,7 @@
     omit-xml-declaration="no"
     standalone="no"
     doctype-public="-//OASIS//DTD DITA Composite//EN"
-    doctype-system="../../../../dtd/ditabase.dtd"/>
+    doctype-system="ditabase.dtd"/>
 
 <xsl:template match="/">
   <dita>
